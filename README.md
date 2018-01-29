@@ -7,7 +7,7 @@ This plugin can be activated as post build step.
 
 IMPORTANT!! RadarGun itself has to be started via a shell script. Therefor, create a shell script build step and copy:
 ```
-java -cp ${JENKINS_HOME}/plugins/radargun-reports/WEB-INF/lib/radargun-2.0.0-SNAPSHOT.jar:${WORKSPACE}/target/benchmarks.jar radargun.RadarGun --cp-assertions assertions/assertions.yaml --jmh-output
+java -cp ${JENKINS_HOME}/plugins/radargun-reporting/WEB-INF/lib/radargun-2.0.0-SNAPSHOT.jar:${WORKSPACE}/target/benchmarks.jar radargun.RadarGun --cp-assertions assertions/assertions.yaml --jmh-output
 ```
 
 ## Configuration
