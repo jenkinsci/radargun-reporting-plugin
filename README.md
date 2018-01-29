@@ -1,6 +1,6 @@
 # RadarGun Plugin for Jenkins to report and visualize performance tests
-RadarGun is a performance testing framework developed at the university of Kiel.
-To use this plugin in Jenkins' build pipeline, we developed this plugin.
+RadarGun (https://github.com/SoerenHenning/RadarGun) is a performance testing framework developed at the university of Kiel.
+To use this RadarGun in Jenkins' build pipeline, we developed this plugin. 
 
 ## Usage
 This plugin can be activated as post build step.
