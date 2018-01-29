@@ -1,0 +1,24 @@
+ <?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout" xmlns:p="/lib/hudson/project">
+    <l:layout>
+       		<st:include it="${it.job}" page="sidepanel.jelly" />
+       
+        <l:main-panel>
+            <h1>${it.displayName}</h1>
+            <h2>${%project(it.ProjectName)}</h2>
+
+         <j:set var="pr" value="${it.packageResults}" />
+ 		<h2>${%packages}</h2>         
+	        <table class="pane sortable bigtable stripped">
+	              <tr>
+			        <th style="text-align: left;">${%package}</th>
+			      </tr>
+		      <j:forEach var="f" items="${pr}" varStatus="i"> 
+		        <tr>
+		          <td class="pane no-wrap"><a href="${f.urlName}">${f.packageName}</a></td>
+		        </tr>
+		      </j:forEach>
+	    		</table>	  
+        </l:main-panel>
+    </l:layout>
+</j:jelly>

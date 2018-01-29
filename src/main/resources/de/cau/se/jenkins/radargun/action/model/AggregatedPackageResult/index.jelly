@@ -1,0 +1,96 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout" xmlns:g="glide">
+       		 	  <script type="text/javascript" src="${it.resURL}/plugin/radargun/canvasplot/dep/demo/jquery-2.2.3.min.js" charset="utf-8" />
+       		 	<script type="text/javascript" src="${it.resURL}/plugin/radargun/canvasplot/canvasplot.js" charset="utf-8" />
+  <script type="text/javascript" src="${it.resURL}/plugin/radargun/canvasplot/dep/canvasplot/d3.min.js" charset="utf-8" />
+   <link rel="stylesheet" href="${it.resURL}/plugin/radargun/canvasplot/canvasplot.css" />
+    <l:layout> 	 
+   	 <st:include it="${it.job}" page="sidepanel.jelly" />
+        <l:main-panel>   
+        <h1>RadarGun Performance Tests</h1>  
+        <h2>${%project(it.job.displayName)}</h2>
+		<h2>${%package(it.packageName)}</h2>	
+ 		<div id="plotcontainer" style="margin: 0 auto; border: 1px solid black; width: 810px; height: 410px;">	
+ 		
+ 		</div>
+	
+		<h2>${%alltests}</h2>         
+	        <table class="pane sortable bigtable stripped">
+	              <tr>
+	              	<th>${%plot}</th>
+	              	<th>${%color}</th>
+			        <th style="text-align: left;">${%testname}</th>
+			        <th>${%units}</th>
+			      </tr>
+		      <j:forEach var="f" items="${it.performanceTestResults}" varStatus="i"> 
+		        <tr>
+		        		<td class="pane" style="text-align:center;"><input type="checkbox" value="${f.displayName}" onchange="plot(this, '${f.unit}')" /></td>
+		        		<td class="pane" id="color"></td>
+		          	<td class="pane no-wrap"><a href="${f.urlName}">${f.displayName}</a></td>
+		          	<td class="pane no-wrap" style="text-align:center;">${f.unit}</td>
+		        </tr>
+		      </j:forEach>
+	    		</table>	  	
+	    		
+			   <script type="text/javascript">
+				var $j = jQuery.noConflict();
+				var colors = ['black','aqua', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white', 'yellow'];
+				var plot1 = null;
+				var units = null;
+					$j("#plotcontainer").fadeOut();
+
+			
+					function plot(element, unit) {
+						if(plot1 === null) {
+							units = unit;
+							plot1 = new CanvasTimeSeriesPlot(d3.select("#plotcontainer"), [800, 400], {
+								xAxisLabel: "Build",
+								yAxisLabel: units
+							});					
+						}
+						
+						if(element.checked == true) {
+					   		if(unit === units) {		
+						   		var data = <st:bind value="${it}"/>
+						   		var color = colors.shift();
+						   		colors.push(color);
+								data.getDataPointsOfTest(element.value, unit, function(t) {
+									plot1.addDataSet(element.value, element.value, JSON.parse(t.responseObject()), color, true);		
+								});
+								$j(element).closest('tr').children("#color").css("background-color", color);
+							} else {
+								element.checked = false;
+								alert("You can only compare performance tests for the same units");
+								return;
+							}
+						}
+						
+						if(element.checked == false) {
+							plot1.removeDataSet(element.value);
+							$j(element).closest('tr').children("#color").css("background-color", "");
+						}
+						
+						setPlotVisibility();
+					}
+					
+					function setPlotVisibility() {
+						var numberCheckedCB = $j("table input:checkbox:checked").length;
+						if(numberCheckedCB == 1) {
+							$j("#plotcontainer").fadeIn();
+						} 
+						
+						if(numberCheckedCB == 0) {
+							$j("#plotcontainer").fadeOut();
+							reset();
+						}
+					}	
+					
+					function reset() {
+						$j("#plotcontainer").empty();
+						units = null;
+						plot1 = null;
+					}	
+			   </script>	   	    			
+        </l:main-panel>
+    </l:layout>
+</j:jelly>

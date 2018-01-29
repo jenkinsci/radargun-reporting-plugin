@@ -1,0 +1,27 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout" xmlns:g="glide">
+	<j:set var="red" value="${(it.testResult.numberOfErrorTests / it.testResult.numberOfTests)*100}" />
+	<j:set var="yellow" value="${(red + it.testResult.numberOfFailedTests / it.testResult.numberOfTests)*100}" />
+
+	<style type="text/css">
+		#grad {
+		  background: white; /* For browsers that do not support gradients */
+		  background: -webkit-linear-gradient(90deg, red, red ${red}%,transparent 5px, transparent 10px),
+		  -webkit-linear-gradient(90deg, yellow, yellow ${yellow}%, transparent 0px, transparent 0px),
+		  -webkit-linear-gradient(90deg, green, green 100%, transparent 5px, transparent 10px); /* For Safari 5.1 to 6.0 */
+		  background: -o-linear-gradient(90deg, red, red ${red}%,transparent 5px, transparent 10px),
+		  -o-linear-gradient(90deg, yellow, yellow ${yellow}%, transparent 5px, transparent 10px),
+		  -o-linear-gradient(90deg, green, green 100%, transparent 5px, transparent 10px);
+		   /* For Opera 11.1 to 12.0 */
+		  background: -moz-linear-gradient(90deg, red, red ${red}%,transparent 5px, transparent 10px),
+		  -moz-linear-gradient(90deg, yellow, yellow ${yellow}%, transparent 5px, transparent 10px)
+		  -moz-linear-gradient(90deg, green, green 100%, transparent 5px, transparent 10px); /* For Firefox 3.6 to 15 */
+		  background: linear-gradient(90deg, red, red ${red}%,transparent 0px, transparent 0px),
+		  linear-gradient(90deg, yellow, yellow ${yellow}%, transparent 0px, transparent 0px), 
+		  linear-gradient(90deg, green, green 100%, transparent 5px, transparent 10px);/* Standard syntax */
+		  
+		  min-height: 20px;
+		  min-width: 90%;
+		}
+	</style>
+</j:jelly>

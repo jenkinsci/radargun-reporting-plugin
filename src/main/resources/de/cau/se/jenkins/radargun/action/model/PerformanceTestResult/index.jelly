@@ -1,0 +1,53 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout" xmlns:g="glide">
+    <l:layout>
+    		<st:include it="${it.run}" page="sidepanel.jelly" />
+    		
+    		<j:invokeStatic var="confidenceinterval" method="toString" className="java.util.Arrays">
+    			<j:arg value="${it.confidenceInterval}"/>
+  		</j:invokeStatic>
+  
+        <l:main-panel>
+        <h1>RadarGun Performance Tests</h1>
+            <h2>${%benchmark(it.displayName, it.run.number)}</h2>
+            <table>
+            		<tr>
+            			<td>${%status}</td>
+            			<td>${it.wasSuccessful()}</td>
+            		</tr>
+            		<tr>
+            			<td>${%units}</td>
+            			<td>${it.testResult.assertion.timeunit}</td>
+            		</tr>
+            		<tr>
+            			<td>${%assertion}</td>
+            			<td>${it.testResult.assertion}</td>
+            		</tr>  
+            		<tr>
+            			<td>${%confidenceinterval}</td>
+            			<td>${confidenceinterval}</td>
+            		</tr>   
+            		<tr>
+            			<td>${%score}</td>
+            			<td>${it.score}</td>
+            		</tr>
+            		<tr>
+            			<td>${%mean}</td>
+            			<td>${it.mean}</td>
+            		</tr>    
+            		<tr>
+            			<td>${%max}</td>
+            			<td>${it.max}</td>
+            		</tr>        
+            		<tr>
+            			<td>${%min}</td>
+            			<td>${it.min}</td>
+            		</tr>   
+            		<tr> 
+            			<td>${%fullduration}</td>
+            			<td>${it.duration}</td>
+            		</tr>             		  		         		
+            </table>
+        </l:main-panel>
+    </l:layout>
+</j:jelly>

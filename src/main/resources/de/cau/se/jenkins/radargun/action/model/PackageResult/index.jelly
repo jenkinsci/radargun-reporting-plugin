@@ -1,0 +1,88 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout" xmlns:g="glide">
+	<j:set var="red" value="${(it.numberOfErrorTests / it.numberOfTests)*100}" />
+	<j:set var="yellow" value="${(red + it.numberOfFailedTests / it.numberOfTests)*100}" />
+
+	<style type="text/css">
+		#grad {
+		  /* For browsers that do not support gradients */
+		  background: white;
+		  border: 1px solid grey;
+		  
+		   /* For Safari 5.1 to 6.0 */
+		  background: -webkit-linear-gradient(90deg, red, red ${red}%,transparent 5px, transparent 10px),
+		  -webkit-linear-gradient(90deg, yellow, yellow ${yellow}%, transparent 0px, transparent 0px),
+		  -webkit-linear-gradient(90deg, green, green 100%, transparent 5px, transparent 10px); 
+		
+		  /* For Opera 11.1 to 12.0 */
+		  background: -o-linear-gradient(90deg, red, red ${red}%,transparent 5px, transparent 10px),
+		  -o-linear-gradient(90deg, yellow, yellow ${yellow}%, transparent 5px, transparent 10px),
+		  -o-linear-gradient(90deg, green, green 100%, transparent 5px, transparent 10px);
+		
+		  /* For Firefox 3.6 to 15 */
+		  background: -moz-linear-gradient(90deg, red, red ${red}%,transparent 5px, transparent 10px),
+		  -moz-linear-gradient(90deg, yellow, yellow ${yellow}%, transparent 5px, transparent 10px)
+		  -moz-linear-gradient(90deg, green, green 100%, transparent 5px, transparent 10px); 
+		
+		  /* Standard syntax */
+		  background: linear-gradient(90deg, red, red ${red}%,transparent 0px, transparent 0px),
+		  linear-gradient(90deg, yellow, yellow ${yellow}%, transparent 0px, transparent 0px), 
+		  linear-gradient(90deg, green, green 100%, transparent 5px, transparent 10px);
+		
+		  /* Standard syntax */
+		
+		  min-height: 20px;
+		  min-width: 90%;
+		}
+	</style>   
+   
+    <l:layout>
+   	 <st:include it="${it.run}" page="sidepanel.jelly" />
+        <l:main-panel>
+        <h1>RadarGun Performance Tests</h1>
+		<h2>${%package(it.packageName)}</h2>
+		<div>
+			<span>${%totaltests(it.numberOfTests)}</span>
+			<div id="grad" width="400px" min-height="30px"> </div>
+			<span style="width: 200px;">${%testserrors(it.numberOfErrorTests)} </span>
+			<span style="padding-left: 20px;">${%testsfailed(it.numberOfFailedTests)} </span>
+			<span style="padding-left: 20px;">${%testssuccessful(it.numberOfSuccessfulTests)} </span>
+		</div> 
+		<h2>${%alltests}</h2>         
+	        <table class="pane sortable bigtable stripped">
+	              <tr>
+			        <th style="text-align: left;">${%testname}</th>
+			        <th>${%score}</th>
+			        <th>${%lowerbound}</th>
+			        <th>${%upperbound}</th>
+			        <th>${%units}</th>
+			        <th>${%confidencelevel}</th>
+			        <th>${%fullduration}</th>
+			      </tr>
+		      <j:forEach var="f" items="${it.performanceTestResults}" varStatus="i"> 
+				<j:choose>
+				<j:when test="${f.wasSuccessful() == true}">
+						      	<j:set var="jvar_coloring" value="green" />
+				</j:when>
+				<j:when test="${f.testResult.hasFailed() == true}">
+						      	<j:set var="jvar_coloring" value="yellow" />
+				</j:when>
+				<j:otherwise>
+						      	<j:set var="jvar_coloring" value="red" />
+				</j:otherwise>
+				</j:choose>		 
+			<tr style="background-color: ${jvar_coloring};">
+		          <td class="pane no-wrap"><a href="${f.urlName}">${f.benchmarkName}</a></td>
+		          <td class="pane no-wrap" style="text-align:center;">${f.score}</td>
+		          <td class="pane no-wrap" style="text-align:center;">${f.lowerBound}</td>
+		          <td class="pane no-wrap" style="text-align:center;">${f.upperBound}</td>
+		          <td class="pane no-wrap" style="text-align:center;">${f.testResult.assertion.timeunit}</td>
+		          <td class="pane no-wrap" style="text-align:center;">${f.confidenceLevel}</td>	
+		          <td class="pane no-wrap" style="text-align:center;">${f.duration}</td>	          
+		        </tr>
+		      </j:forEach>
+	    		</table>	  		
+		
+        </l:main-panel>
+    </l:layout>
+</j:jelly>
