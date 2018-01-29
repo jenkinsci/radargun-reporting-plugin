@@ -1,3 +1,18 @@
+/**
+ * Copyright © 2018 Alexander Barbie (alexanderbarbie@gmx.de)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cau.se.jenkins.radargun.action.model;
 
 import java.util.ArrayList;
@@ -41,13 +56,12 @@ public class AggregatedPerformanceTestResult implements Action, StaplerProxy, Pe
 
 	@Override
 	public String getIconFileName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getUrlName() {
-		return this.benchmarkName+"?unit="+this.unit;
+		return this.benchmarkName + "?unit=" + this.unit;
 	}
 
 	@Override
@@ -77,16 +91,15 @@ public class AggregatedPerformanceTestResult implements Action, StaplerProxy, Pe
 
 	@Override
 	public boolean wasSuccessful() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	public void addPerformanceTestResult(final PerformanceTestResult performanceTestResult) {
-		if(!(performanceTestResult == null)) {
-			if(this.unit.equals(performanceTestResult.getTestResult().getAssertion().getTimeunit())) {
+		if (!(performanceTestResult == null)) {
+			if (this.unit.equals(performanceTestResult.getTestResult().getAssertion().getTimeunit())) {
 				this.performanceTestResults.add(performanceTestResult);
 			}
-		}		
+		}
 	}
 
 	public Job<?, ?> getJob() {
@@ -114,7 +127,7 @@ public class AggregatedPerformanceTestResult implements Action, StaplerProxy, Pe
 
 		return dataPoints.toString();
 	}
-	
+
 	public String getLowerBoundsDataPoints() {
 		final List<DataPoint> dataPoints = new ArrayList<>();
 		performanceTestResults.forEach(performanceTestResult -> dataPoints
@@ -126,49 +139,41 @@ public class AggregatedPerformanceTestResult implements Action, StaplerProxy, Pe
 
 	@Override
 	public boolean hasFailed() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public double getLowerBound() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public double getUpperBound() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public double getConfidenceLevel() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public double getMean() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public double getMax() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public double getMin() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public String getDuration() {
-		// TODO Auto-generated method stub
 		return "0";
 	}
 
@@ -179,7 +184,6 @@ public class AggregatedPerformanceTestResult implements Action, StaplerProxy, Pe
 
 	@Override
 	public String getBenchmarkName() {
-		// TODO Auto-generated method stub
 		return this.benchmarkName;
 	}
 
@@ -196,6 +200,6 @@ public class AggregatedPerformanceTestResult implements Action, StaplerProxy, Pe
 	@Override
 	public boolean equals(Object o) {
 		return Objects.equals(this, o);
-	}		
-	
+	}
+
 }

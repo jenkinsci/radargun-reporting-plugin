@@ -1,3 +1,18 @@
+/**
+ * Copyright © 2018 Alexander Barbie (alexanderbarbie@gmx.de)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cau.se.jenkins.radargun.action;
 
 import java.io.IOException;
@@ -23,6 +38,7 @@ import de.cau.se.jenkins.radargun.action.model.ResultOverview;
 import hudson.FilePath;
 import hudson.model.Action;
 import hudson.model.Run;
+import jenkins.model.Jenkins;
 import jenkins.tasks.SimpleBuildStep;
 import radargun.Options;
 import radargun.output.stages.TestResultAggregatorStage;
@@ -46,7 +62,7 @@ public class RadarGunBuildAction implements Action, SimpleBuildStep.LastBuildAct
 
 	@Override
 	public String getIconFileName() {
-		return "/plugin/radargun/img/dragonradar.png";
+		return RadarGunProjectAction.ICON_URL;
 	}
 
 	@Override
@@ -56,7 +72,7 @@ public class RadarGunBuildAction implements Action, SimpleBuildStep.LastBuildAct
 
 	@Override
 	public String getUrlName() {
-		return "radargun";
+		return RadarGunProjectAction.PLUGIN_ID;
 	}
 
 	public int getBuildNumber() {
@@ -67,7 +83,7 @@ public class RadarGunBuildAction implements Action, SimpleBuildStep.LastBuildAct
 		return this.run;
 	}
 
-	public Set<PerformanceTestResult> getPerformanceTestResults() {		
+	public Set<PerformanceTestResult> getPerformanceTestResults() {
 		return this.performanceTestResults;
 	}
 
@@ -79,7 +95,8 @@ public class RadarGunBuildAction implements Action, SimpleBuildStep.LastBuildAct
 		if (this.testResult == null) {
 			try {
 				return new XmlMapper().readValue(
-						Files.newInputStream(Paths.get(this.workspace.toURI().getPath(), Options.DEFAULTEXPORTPATH, TestResultAggregatorStage.AGGREGATEDFILENAME), StandardOpenOption.READ),
+						Files.newInputStream(Paths.get(this.workspace.toURI().getPath(), Options.DEFAULTEXPORTPATH,
+								TestResultAggregatorStage.AGGREGATEDFILENAME), StandardOpenOption.READ),
 						AggregatedTestResultImpl.class);
 			} catch (IOException | InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -91,13 +108,13 @@ public class RadarGunBuildAction implements Action, SimpleBuildStep.LastBuildAct
 	}
 
 	private void createPackageStructure() {
-		final Multimap<String, TestResult> packageStructure = RadarGunUtil
-				.createPackageStructure(this.testResult);
+		final Multimap<String, TestResult> packageStructure = RadarGunUtil.createPackageStructure(this.testResult);
 		for (final String packageName : packageStructure.keySet()) {
 			final PackageResult packageResult = new PackageResult(packageName, this.run);
 
 			for (final TestResult testResult : packageStructure.get(packageName)) {
-				final PerformanceTestResult performanceTestResultAction = new PerformanceTestResult(testResult, this.run.number);
+				final PerformanceTestResult performanceTestResultAction = new PerformanceTestResult(testResult,
+						this.run.number);
 				this.performanceTestResults.add(performanceTestResultAction);
 				packageResult.addPerformanceTestResult(performanceTestResultAction);
 				this.run.addAction(performanceTestResultAction);

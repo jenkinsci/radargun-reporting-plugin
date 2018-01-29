@@ -14,6 +14,7 @@
 	<artifactId>radargun-reporting</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>hpi</packaging>
+	<inceptionYear>2018</inceptionYear>
 
 	<properties>
 		<!-- Baseline Jenkins version you use to build the plugin. Users must have 
@@ -93,12 +94,6 @@
             <groupId>org.jenkins-ci.plugins.workflow</groupId>
             <artifactId>workflow-api</artifactId>
             <version>2.22</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jenkins-ci.plugins</groupId>
-                    <artifactId>scm-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
@@ -106,5 +101,34 @@
             <version>1.30</version>
         </dependency>
 	</dependencies>
-
+	
+	<build>
+	<plugins>
+			<!-- Copyright Header -->
+			<plugin>
+				<groupId>com.mycila</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+					<properties>
+						<owner>Alexander Barbie</owner>
+						<email>alexanderbarbie@gmx.de</email>
+						<year>2018</year>
+					</properties>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<goals>
+							<goal>format</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>	
+	</plugins>
+	</build>
 </project>

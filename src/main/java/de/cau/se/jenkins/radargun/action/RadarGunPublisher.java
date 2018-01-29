@@ -1,3 +1,18 @@
+/**
+ * Copyright © 2018 Alexander Barbie (alexanderbarbie@gmx.de)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cau.se.jenkins.radargun.action;
 
 import java.io.IOException;
@@ -34,14 +49,14 @@ public class RadarGunPublisher extends Recorder implements SimpleBuildStep {
 		this.run = run;
 		RadarGunBuildAction buildAction = new RadarGunBuildAction(run, workspace);
 		run.addAction(buildAction);
-		
+
 		if (buildAction != null) {
-			if(buildAction.getNumberOfFailedTests() > 0) {
+			if (buildAction.getNumberOfFailedTests() > 0) {
 				run.setResult(Result.UNSTABLE);
-			} else if(buildAction.getNumberOfErrorTests() > 0) {
+			} else if (buildAction.getNumberOfErrorTests() > 0) {
 				run.setResult(Result.FAILURE);
 			} else {
-				run.setResult(Result.SUCCESS);	
+				run.setResult(Result.SUCCESS);
 			}
 		}
 
@@ -51,9 +66,6 @@ public class RadarGunPublisher extends Recorder implements SimpleBuildStep {
 		return this.run;
 	}
 
-	// Overridden for better type safety.
-	// If your plugin doesn't really define any property on Descriptor,
-	// you don't have to do this.
 	@Override
 	public DescriptorImpl getDescriptor() {
 		return (DescriptorImpl) super.getDescriptor();
@@ -64,27 +76,14 @@ public class RadarGunPublisher extends Recorder implements SimpleBuildStep {
 		return BuildStepMonitor.NONE;
 	}
 
-	@Extension // This indicates to Jenkins that this is an implementation of an extension
-				// point.
+	@Extension
 	public static final class DescriptorImpl extends BuildStepDescriptor<Publisher> {
-
-		// private boolean useFrench;
 
 		public DescriptorImpl() {
 			load();
 		}
 
-		// public FormValidation doCheckName(@QueryParameter String value)
-		// throws IOException, ServletException {
-		// if (value.length() == 0)
-		// return FormValidation.error("Please set a name");
-		// if (value.length() < 4)
-		// return FormValidation.warning("Isn't the name too short?");
-		// return FormValidation.ok();
-		// }
-
 		public boolean isApplicable(Class<? extends AbstractProject> aClass) {
-			// Indicates that this builder can be used with all kinds of project types
 			return true;
 		}
 
@@ -94,18 +93,8 @@ public class RadarGunPublisher extends Recorder implements SimpleBuildStep {
 
 		@Override
 		public boolean configure(StaplerRequest req, JSONObject formData) throws FormException {
-			// To persist global configuration information,
-			// set that to properties and call save().
-			// useFrench = formData.getBoolean("useFrench");
-			// ^Can also use req.bindJSON(this, formData);
-			// (easier when there are many fields; need set* methods for this, like
-			// setUseFrench)
 			save();
 			return super.configure(req, formData);
 		}
-
-		// public boolean getUseFrench() {
-		// return useFrench;
-		// }
 	}
 }

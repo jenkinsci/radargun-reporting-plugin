@@ -1,3 +1,18 @@
+/**
+ * Copyright © 2018 Alexander Barbie (alexanderbarbie@gmx.de)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.cau.se.jenkins.radargun.action.model;
 
 import java.time.LocalDateTime;
@@ -18,7 +33,8 @@ public class PerformanceTestResult extends AbstractPerformanceTestResultAction<P
 
 	public PerformanceTestResult(TestResult testResult, final int buildNumber) {
 		this.testResult = testResult;
-		this.benchmarkName = testResult.getBenchmark().substring(testResult.getPackage().length()+1, testResult.getBenchmark().length());
+		this.benchmarkName = testResult.getBenchmark().substring(testResult.getPackage().length() + 1,
+				testResult.getBenchmark().length());
 		this.packageName = testResult.getPackage();
 		this.unit = testResult.getAssertion().getTimeunit();
 		this.buildNumber = buildNumber;
@@ -35,7 +51,6 @@ public class PerformanceTestResult extends AbstractPerformanceTestResultAction<P
 
 	@Override
 	public String getIconFileName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -43,20 +58,18 @@ public class PerformanceTestResult extends AbstractPerformanceTestResultAction<P
 	public String getUrlName() {
 		return this.benchmarkName;
 	}
-	
+
 	public String getUrlNameWithPackage() {
-		return this.getPackageName()+"/"+this.getUrlName();
+		return this.getPackageName() + "/" + this.getUrlName();
 	}
 
 	@Override
 	public int getFailCount() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getTotalCount() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -121,7 +134,8 @@ public class PerformanceTestResult extends AbstractPerformanceTestResultAction<P
 
 	@Override
 	public String getDuration() {
-		return RadarGunUtil.difference(LocalDateTime.parse(this.testResult.getStart()),LocalDateTime.parse(this.testResult.getFinish())).toString();
+		return RadarGunUtil.difference(LocalDateTime.parse(this.testResult.getStart()),
+				LocalDateTime.parse(this.testResult.getFinish())).toString();
 	}
 
 	@Override
@@ -130,17 +144,18 @@ public class PerformanceTestResult extends AbstractPerformanceTestResultAction<P
 	}
 
 	public double[] getConfidenceInterval() {
-//		Arrays.toString(new double[] {});
-		return new double[] {format(this.testResult.getConfidenceInterval()[0]),format(this.testResult.getConfidenceInterval()[1])};
+		return new double[] { format(this.testResult.getConfidenceInterval()[0]),
+				format(this.testResult.getConfidenceInterval()[1]) };
 	}
-	
+
 	private static double format(final double number) {
 		return Math.round(number * 100.0) / 100.0;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(testResult.getBenchmark(), testResult.getAssertion().getTimeunit(), testResult.getAssertion().getConfidenceLevel(), this.buildNumber);
+		return Objects.hash(testResult.getBenchmark(), testResult.getAssertion().getTimeunit(),
+				testResult.getAssertion().getConfidenceLevel(), this.buildNumber);
 	}
 
 	@Override
@@ -151,8 +166,8 @@ public class PerformanceTestResult extends AbstractPerformanceTestResultAction<P
 	@Override
 	public int compareTo(PerformanceTestResult o) {
 		return this.run.getNumber() - o.run.getNumber();
-	}	
-	
+	}
+
 	public String getUnit() {
 		return this.unit;
 	}

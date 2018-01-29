@@ -1,9 +1,9 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout" xmlns:g="glide">
-       		 	  <script type="text/javascript" src="${it.resURL}/plugin/radargun/canvasplot/dep/demo/jquery-2.2.3.min.js" charset="utf-8" />
-       		 	<script type="text/javascript" src="${it.resURL}/plugin/radargun/canvasplot/canvasplot.js" charset="utf-8" />
-  <script type="text/javascript" src="${it.resURL}/plugin/radargun/canvasplot/dep/canvasplot/d3.min.js" charset="utf-8" />
-   <link rel="stylesheet" href="${it.resURL}/plugin/radargun/canvasplot/canvasplot.css" />
+       		 	<script type="text/javascript" src="${it.resURL}/plugin/radargun-reporting/canvasplot/canvasplot.js" charset="utf-8" />
+       		 	  <script src="${it.resURL}/plugin/radargun-reporting/canvasplot/dep/demo/jquery-2.2.3.min.js" charset="utf-8" />
+  <script src="${it.resURL}/plugin/radargun-reporting/canvasplot/dep/canvasplot/d3.min.js" charset="utf-8" />
+   <link rel="stylesheet" href="${it.resURL}/plugin/radargun-reporting/canvasplot/canvasplot.css" />
     <l:layout> 	 
    	 <st:include it="${it.job}" page="sidepanel.jelly" />
         <l:main-panel>   
