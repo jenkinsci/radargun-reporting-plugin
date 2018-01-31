@@ -28,7 +28,7 @@ import radargun.shared.comparison.result.TestResult;
 import radargun.shared.model.AggregatedTestResult;
 
 public final class RadarGunUtil {
-	public static final String resURL = Jenkins.get().getRootUrl() + Functions.getResourcePath();
+	public static final String resURL = Jenkins.getInstance().getRootUrl() + Functions.getResourcePath();
 
 	private RadarGunUtil() {
 	}

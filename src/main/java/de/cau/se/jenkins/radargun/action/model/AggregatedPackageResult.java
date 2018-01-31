@@ -170,7 +170,7 @@ public class AggregatedPackageResult implements Action, StaplerProxy, ResultOver
 	}
 
 	public String getResURL() {
-		final String url = Jenkins.get().getRootUrl() + Functions.getResourcePath();
+		final String url = Jenkins.getInstance().getRootUrl() + Functions.getResourcePath();
 		return url;
 	}
 }

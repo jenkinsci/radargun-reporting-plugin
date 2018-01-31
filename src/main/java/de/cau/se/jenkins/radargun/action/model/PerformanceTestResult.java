@@ -94,7 +94,7 @@ public class PerformanceTestResult extends AbstractPerformanceTestResultAction<P
 	}
 
 	public String getAbsoluteUrl() {
-		return Jenkins.get().getRootUrl() + this.run.getUrl() + this.packageName + "/" + this.getUrlName();
+		return Jenkins.getInstance().getRootUrl() + this.run.getUrl() + this.packageName + "/" + this.getUrlName();
 	}
 
 	@Override

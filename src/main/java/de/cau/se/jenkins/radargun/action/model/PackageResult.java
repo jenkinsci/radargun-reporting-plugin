@@ -63,7 +63,6 @@ public class PackageResult implements Action, StaplerProxy, ResultOverview {
 
 	@Override
 	public String getIconFileName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
