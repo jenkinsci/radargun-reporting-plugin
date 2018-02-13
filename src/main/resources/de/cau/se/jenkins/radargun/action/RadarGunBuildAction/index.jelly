@@ -60,6 +60,7 @@
 			        <th>${%fullduration}</th>
 			      </tr>
 		      <j:forEach var="f" items="${it.performanceTestResults}">
+		        <j:if test="${f.hasFailed()}">
 		        <tr>
 		          <td class="pane no-wrap"><a href="${f.urlNameWithPackage}">${f.benchmarkName}</a></td>
 		          <td class="pane no-wrap" style="text-align:center;">${f.score}</td>
@@ -69,6 +70,7 @@
 		          <td class="pane no-wrap" style="text-align:center;">${f.confidenceLevel}</td>	
 		          <td class="pane no-wrap" style="text-align:center;">${f.duration}</td>	          
 		        </tr>
+		        </j:if>
 		      </j:forEach>
 	    		</table>
 	    		
