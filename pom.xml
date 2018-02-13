@@ -23,7 +23,8 @@
 
 	<name>RadarGun Reporting Plugin</name>
 	<description>Report and visualize performance tests done by RadarGun</description>
-	<url>https://build.se.informatik.uni-kiel.de/thesis/alexander-barbie-msc/tree/master/jenkinsplugin</url>
+	<url>https://wiki.jenkins.io/display/JENKINS/Radargun-Reporting+Plugin</url>
+
 	<developers>
 		<developer>
 			<id>abar</id>
@@ -42,7 +43,7 @@
 	<licenses>
 		<license>
 			<name>Apache License, Version 2.0</name>
-			<url>https://github.com/SoerenHenning/RadarGun/blob/master/LICENSE</url>
+			<url>https://github.com/jenkinsci/radargun-reporting-plugin/blob/master/LICENSE</url>
 		</license>
 	</licenses>
 
@@ -111,11 +112,11 @@
 		</dependency>
 	</dependencies>
 
-<scm>
-  <connection>scm:git:ssh://github.com/jenkinsci/radargun-reporting-plugin.git</connection>
-  <developerConnection>scm:git:ssh://git@github.com:jenkinsci/radargun-reporting-plugin.git</developerConnection>
-  <url>https://github.com/jenkinsci/radargun-reporting-plugin</url>
-</scm>
+	<scm>
+		<connection>scm:git:ssh://github.com/jenkinsci/radargun-reporting-plugin.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:jenkinsci/radargun-reporting-plugin.git</developerConnection>
+		<url>https://github.com/jenkinsci/radargun-reporting-plugin</url>
+	</scm>
 
 	<build>
 		<plugins>
