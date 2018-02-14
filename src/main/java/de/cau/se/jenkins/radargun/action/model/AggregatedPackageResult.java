@@ -28,6 +28,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 
 import hudson.Functions;
+import hudson.Util;
 import hudson.model.Action;
 import hudson.model.Job;
 import jenkins.model.Jenkins;
@@ -170,7 +171,7 @@ public class AggregatedPackageResult implements Action, StaplerProxy, ResultOver
 	}
 
 	public String getResURL() {
-		final String url = Jenkins.getInstance().getRootUrl() + Functions.getResourcePath();
+		final String url = Functions.getResourcePath();
 		return url;
 	}
 }

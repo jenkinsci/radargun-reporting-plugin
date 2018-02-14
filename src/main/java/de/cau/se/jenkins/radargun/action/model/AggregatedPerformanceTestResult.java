@@ -107,7 +107,7 @@ public class AggregatedPerformanceTestResult implements Action, StaplerProxy, Pe
 	}
 
 	public String getResURL() {
-		final String url = Jenkins.getInstance().getRootUrl() + Functions.getResourcePath();
+		final String url = Functions.getResourcePath();
 		return url;
 	}
 
