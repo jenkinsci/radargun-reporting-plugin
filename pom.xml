@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>radargun-reporting</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>hpi</packaging>
 	<inceptionYear>2018</inceptionYear>
 
