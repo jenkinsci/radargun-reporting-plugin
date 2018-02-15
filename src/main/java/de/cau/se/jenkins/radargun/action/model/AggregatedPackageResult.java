@@ -28,7 +28,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 
 import hudson.Functions;
-import hudson.Util;
 import hudson.model.Action;
 import hudson.model.Job;
 import jenkins.model.Jenkins;
