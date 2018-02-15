@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>radargun-reporting</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3-SNAPSHOT</version>
 	<packaging>hpi</packaging>
 	<inceptionYear>2018</inceptionYear>
 
@@ -115,7 +115,7 @@
 		<connection>scm:git:ssh://github.com/jenkinsci/radargun-reporting-plugin.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/jenkinsci/radargun-reporting-plugin.git</developerConnection>
 		<url>https://github.com/jenkinsci/radargun-reporting-plugin</url>
-	  <tag>radargun-reporting-1.0.2</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<build>
