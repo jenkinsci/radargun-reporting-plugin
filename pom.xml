@@ -5,7 +5,8 @@
 	<parent>
 		<groupId>org.jenkins-ci.plugins</groupId>
 		<artifactId>plugin</artifactId>
-		<version>3.2</version>
+		<version>4.88</version>
+		<relativePath />
 	</parent>
 
 	<artifactId>radargun-reporting</artifactId>
@@ -14,8 +15,9 @@
 	<inceptionYear>2018</inceptionYear>
 
 	<properties>
-		<jenkins.version>2.89.3</jenkins.version>
-		<java.level>8</java.level>
+		<!-- https://www.jenkins.io/doc/developer/plugin-development/choosing-jenkins-baseline/ -->
+		<jenkins.baseline>2.462</jenkins.baseline>
+		<jenkins.version>${jenkins.baseline}.3</jenkins.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -23,27 +25,23 @@
 	<description>Report and visualize performance tests done by RadarGun</description>
 	<url>https://wiki.jenkins.io/display/JENKINS/Radargun-Reporting+Plugin</url>
 
-	<developers>
-		<developer>
-			<id>abar</id>
-			<name>Alexander Barbie</name>
-			<email>alexanderbarbie@gmx.de</email>
-			<url>https://github.com/AlexanderBarbie</url>
-			<organization>SE - University of Kiel</organization>
-			<organizationUrl>https://www.se.informatik.uni-kiel.de/</organizationUrl>
-			<roles>
-				<role>architect</role>
-				<role>developer</role>
-			</roles>
-		</developer>
-	</developers>
-
 	<licenses>
 		<license>
 			<name>Apache License, Version 2.0</name>
 			<url>https://github.com/jenkinsci/radargun-reporting-plugin/blob/master/LICENSE</url>
 		</license>
 	</licenses>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.jenkins.tools.bom</groupId>
+				<artifactId>bom-${jenkins.baseline}.x</artifactId>
+				<version>4228.v0a_71308d905b_</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 
 	<repositories>
@@ -73,33 +71,28 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>23.6-jre</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jenkins-ci.plugins</groupId>
 			<artifactId>structs</artifactId>
-			<version>1.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jenkins-ci.plugins.workflow</groupId>
 			<artifactId>workflow-step-api</artifactId>
-			<version>2.12</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jenkins-ci.plugins.workflow</groupId>
 			<artifactId>workflow-api</artifactId>
-			<version>2.22</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jenkins-ci.plugins</groupId>
 			<artifactId>script-security</artifactId>
-			<version>1.30</version>
 		</dependency>
 	</dependencies>
 
 	<scm>
-		<connection>scm:git:ssh://github.com/jenkinsci/radargun-reporting-plugin.git</connection>
+		<connection>scm:git:https://github.com/jenkinsci/radargun-reporting-plugin.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/jenkinsci/radargun-reporting-plugin.git</developerConnection>
 		<url>https://github.com/jenkinsci/radargun-reporting-plugin</url>
 		<tag>radargun-reporting-1.0.3</tag>
